@@ -56,6 +56,17 @@
         app:layout_constraintStart_toStartOf="@+id/shText"
         app:layout_constraintTop_toBottomOf="@+id/shText" />
 
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/timer"
+        app:layout_constraintEnd_toEndOf="@+id/timer"
+        app:layout_constraintStart_toStartOf="@+id/timer" />
+
+
+
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/info"
         android:layout_width="match_parent"
@@ -103,10 +114,10 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/btnStart"
-        app:layout_constraintEnd_toStartOf="@+id/btnStart"
+        app:layout_constraintBottom_toBottomOf="@+id/btnInput"
+        app:layout_constraintEnd_toStartOf="@+id/btnInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnStart" />
+        app:layout_constraintTop_toTopOf="@+id/btnInput" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/falseWin"
@@ -117,14 +128,14 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/btnStart"
+        app:layout_constraintBottom_toBottomOf="@+id/btnInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
-        app:layout_constraintTop_toTopOf="@+id/btnStart" />
+        app:layout_constraintStart_toEndOf="@+id/btnInput"
+        app:layout_constraintTop_toTopOf="@+id/btnInput" />
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnStart"
+        android:id="@+id/btnInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/btnEnter"
@@ -138,11 +149,26 @@
         app:layout_constraintTop_toBottomOf="@+id/info" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnExam"
+        android:id="@+id/btnReady"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/btnEnter"
-        android:text="@string/btn_exam"
+        android:text="@string/btn_ready"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/info" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/btnEnter"
+        android:text="@string/btn_stop"
         android:textSize="20sp"
         android:visibility="invisible"
         android:gravity="center"
@@ -166,7 +192,7 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/trueWin"
-        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+        app:layout_constraintTop_toBottomOf="@+id/btnInput" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/grade"
@@ -178,36 +204,9 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/headGrade"
-        app:layout_constraintEnd_toEndOf="@+id/btnStart"
-        app:layout_constraintStart_toStartOf="@+id/btnStart"
+        app:layout_constraintEnd_toEndOf="@+id/btnInput"
+        app:layout_constraintStart_toStartOf="@+id/btnInput"
         app:layout_constraintTop_toTopOf="@+id/headGrade" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/headInputTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Timer:"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/falseWin"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
-        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/inputTimer"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/headInputTime"
-        app:layout_constraintStart_toEndOf="@+id/headInputTime"
-        app:layout_constraintTop_toTopOf="@+id/headInputTime" />
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
