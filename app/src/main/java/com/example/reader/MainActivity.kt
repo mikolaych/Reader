@@ -12,8 +12,8 @@ import kotlinx.coroutines.NonCancellable.start
 import kotlin.system.measureTimeMillis
 
 var mainList = listOf<String>()
-var endArray = emptyArray<String>()
-var tempArray = emptyArray<String>()
+var endArray = mutableListOf<String>()
+var tempArray = listOf<String>()
 var wordNum = 0
 var stTime : Long = 0
 
@@ -58,10 +58,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun ready() {
         binding.btnReady.setOnClickListener {
-
             if (wordNum< mainList.size){
             timeToReady()
-                visibilityOn()
+            visibilityOn()
+                wordNum++
             } else end()
         }
     }
@@ -71,17 +71,28 @@ class MainActivity : AppCompatActivity() {
         timer?.cancel()
         timer = object : CountDownTimer(3000,1000){
             override fun onTick(p0: Long) {
-
                 binding.timer.text = (p0/1000).toString()
-
             }
             override fun onFinish() {
-                    binding.viewText.text = mainList[wordNum]
-                    wordNum++
+                binding.viewText.text = mainList[wordNum]
                 binding.btnReady.visibility = View.INVISIBLE
                 binding.btnStop.visibility = View.VISIBLE
+                timeToStop()
+            }
+        }.start()
+    }
 
-
+    private fun timeToStop() {
+        val startTime: Long = 10000
+        timer?.cancel()
+        timer = object : CountDownTimer(startTime,1000){
+            override fun onTick(p0: Long) {
+                binding.timer.text = (startTime/1000 - (p0/1000)).toString()
+            }
+            override fun onFinish() {
+                binding.viewText.text = mainList[wordNum]
+                binding.btnReady.visibility = View.INVISIBLE
+                binding.btnStop.visibility = View.VISIBLE
             }
         }.start()
     }
@@ -89,7 +100,14 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun stop() {
-
+        binding.btnStop.setOnClickListener {
+            timer?.cancel()
+            binding.viewText.visibility = View.INVISIBLE
+            binding.shText.visibility = View.VISIBLE
+            binding.btnStop.visibility = View.INVISIBLE
+            binding.btnReady.visibility = View.VISIBLE
+            endArray.add((wordNum - 1), binding.shText.text.toString())
+        }
     }
 
     private fun end() {
