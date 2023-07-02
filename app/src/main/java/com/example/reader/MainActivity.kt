@@ -13,7 +13,6 @@ import kotlin.system.measureTimeMillis
 
 var mainList = listOf<String>()
 var exampleArray = mutableListOf<String>()
-var tempArray = listOf<String>()
 lateinit var tempWord :String
 lateinit var tempWordEtal :String
 var wordNum = 0
@@ -117,16 +116,17 @@ class MainActivity : AppCompatActivity() {
         timer?.cancel()
         timer = object : CountDownTimer(startTime,1){
             override fun onTick(p0: Long) {
+
                 binding.timer.text = (startTime - p0).toString()
 
 
             }
             override fun onFinish() {
                 binding.viewText.text = mainList[wordNum]
-
                 binding.btnReady.visibility = View.INVISIBLE
                 binding.btnStop.visibility = View.VISIBLE
-            }
+
+                            }
         }.start()
     }
 
@@ -142,9 +142,6 @@ class MainActivity : AppCompatActivity() {
 
                 timer?.cancel()
 
-
-
-                binding.timer.text = null
 
                 inputWord()
             }
@@ -168,13 +165,19 @@ class MainActivity : AppCompatActivity() {
                     tempWord = binding.shText.text.toString()
                     if (binding.shText.text.toString() == tempWordEtal) {
                         trueNum++
+                        plusTime += binding.timer.text.toString().toLong()
+                        binding.numWords.text = (trueNum * 60000 / plusTime).toString()
                         binding.trueWin.text = trueNum.toString()
                     } else {
                         falseNum++
                         binding.falseWin.text = falseNum.toString()
                     }
+
+
+
                     binding.btnNext.visibility = View.INVISIBLE
                     binding.info.text = null
+                    binding.timer.text = null
                     binding.shText.text = null
                     binding.viewText.text = null
                     if (wordNum < mainList.size) {
@@ -201,15 +204,15 @@ class MainActivity : AppCompatActivity() {
             headTrue.visibility = View.INVISIBLE
             trueWin.visibility = View.INVISIBLE
             falseWin.visibility = View.INVISIBLE
-            headNumWords.visibility = View.INVISIBLE
-            numWords.visibility = View.INVISIBLE
             num.visibility = View.INVISIBLE
             slash.visibility = View.INVISIBLE
             size.visibility = View.INVISIBLE
 
         }
 
-        binding.info.text = exampleArray.toString()
+          binding.info.text = exampleArray.toString()
+        binding.grade.text = falseNum.toString()
+
 
 
     }

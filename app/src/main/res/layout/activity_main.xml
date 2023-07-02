@@ -234,7 +234,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Оценка"
+        android:text="Ошибок:"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:visibility="invisible"
