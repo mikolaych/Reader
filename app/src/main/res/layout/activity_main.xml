@@ -41,7 +41,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="16sp"/>
+        android:textSize="24sp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/timer"
@@ -54,6 +54,19 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/shText"
         app:layout_constraintStart_toStartOf="@+id/shText"
+        app:layout_constraintTop_toBottomOf="@+id/shText" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timerSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="@color/timer"
+        android:textSize="20sp"
+
+        app:layout_constraintEnd_toEndOf="@+id/shText"
+        app:layout_constraintStart_toEndOf="@+id/timer"
         app:layout_constraintTop_toBottomOf="@+id/shText" />
 
 
@@ -168,35 +181,82 @@
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toBottomOf="@+id/info" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/btnEnter"
+        android:text="@string/btn_next"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/info" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/headGrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Оценка"
-        android:visibility="invisible"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/grade"
-        android:layout_marginEnd="20dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/trueWin"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnInput" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/grade"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginStart="5dp"
         android:background="@android:color/holo_blue_bright"
         android:gravity="center"
-        android:visibility="invisible"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/headGrade"
-        app:layout_constraintEnd_toEndOf="@+id/btnInput"
-        app:layout_constraintStart_toStartOf="@+id/btnInput"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintStart_toEndOf="@+id/headGrade"
         app:layout_constraintTop_toTopOf="@+id/headGrade" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/headNumWords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Слов в минуту:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/grade"
+        app:layout_constraintTop_toBottomOf="@+id/btnInput" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/numWords"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/holo_blue_bright"
+        android:gravity="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/headGrade"
+        app:layout_constraintStart_toEndOf="@+id/headNumWords"
+        app:layout_constraintTop_toTopOf="@+id/headGrade" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

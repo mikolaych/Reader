@@ -3,4 +3,5 @@
     <string name="btn_enter">Ввод</string>
     <string name="btn_ready">Готов</string>
     <string name="btn_stop">Стоп</string>
+    <string name="btn_next">Следующий</string>
 </resources>
