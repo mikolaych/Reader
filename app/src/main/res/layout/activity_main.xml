@@ -56,18 +56,6 @@
         app:layout_constraintStart_toStartOf="@+id/shText"
         app:layout_constraintTop_toBottomOf="@+id/shText" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timerSum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:textColor="@color/timer"
-        android:textSize="20sp"
-
-        app:layout_constraintEnd_toEndOf="@+id/shText"
-        app:layout_constraintStart_toEndOf="@+id/timer"
-        app:layout_constraintTop_toBottomOf="@+id/shText" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -76,7 +64,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
+        android:textSize="24sp"
+        android:layout_marginHorizontal="10dp"
         android:textColor="@android:color/holo_red_dark"
         app:layout_constraintTop_toBottomOf="@+id/timer" />
 
@@ -93,6 +82,48 @@
         app:layout_constraintBottom_toTopOf="@+id/trueWin"
         app:layout_constraintEnd_toEndOf="@+id/trueWin"
         app:layout_constraintStart_toStartOf="@+id/trueWin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnInput"
+        app:layout_constraintEnd_toEndOf="@+id/btnInput"
+        app:layout_constraintStart_toEndOf="@+id/headTrue" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/slash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="из"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnInput"
+        app:layout_constraintEnd_toStartOf="@+id/size"
+        app:layout_constraintStart_toEndOf="@+id/num" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnInput"
+        app:layout_constraintEnd_toStartOf="@+id/headFalse"
+        app:layout_constraintStart_toStartOf="@+id/btnInput" />
+
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/headFalse"
