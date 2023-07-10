@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/bg"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tittleSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Настройки"
+            android:textStyle="bold"
+            android:textColor="#5C0404"
+            android:textSize="40sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnQuickGame"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/holo_orange_dark"
+            android:text="Быстрая игра"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tittleSettings" />
+
+        <TextView
+            android:id="@+id/tittleNumLvl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Количество уровней"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnQuickGame" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/lvlNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="1"
+            android:valueTo="3"
+            app:layout_constraintTop_toBottomOf="@+id/tittleNumLvl" />
+
+
+        <TextView
+            android:id="@+id/tittleNumExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20px"
+            android:text="Количество примеров"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lvlNum" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/examNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="5"
+            android:valueTo="10"
+            app:layout_constraintTop_toBottomOf="@+id/tittleNumExample" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/switchTimerTittle"
+            app:layout_constraintStart_toEndOf="@+id/switchTimerTittle"
+            app:layout_constraintTop_toTopOf="@+id/switchTimerTittle" />
+
+
+        <TextView
+            android:id="@+id/tittleTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:layout_marginEnd="20dp"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:text="Таймер, сек."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/timer"
+            app:layout_constraintTop_toBottomOf="@+id/examNum" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/timer"
+            android:layout_width="50dp"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tittleTimer"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tittleTimerPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="Таймер+, сек."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/timerPlus"
+            app:layout_constraintTop_toBottomOf="@+id/timer" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/timerPlus"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:visibility="invisible"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tittleTimerPlus"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSaveSet"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/holo_green_light"
+            android:text="Сохранить настройки"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timerPlus" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/holo_red_light"
+            app:layout_constraintBottom_toTopOf="@+id/btnQuickGame"
+            app:layout_constraintTop_toBottomOf="@+id/tittleSettings"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/holo_red_light"
+            app:layout_constraintBottom_toTopOf="@+id/tittleNumLvl"
+            app:layout_constraintTop_toBottomOf="@+id/btnQuickGame"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/holo_red_light"
+            app:layout_constraintTop_toBottomOf="@+id/btnSaveSet"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <TextView
+            android:id="@+id/switchTimerTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Таймер:"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tittleTimerPlus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tittleTimer" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
