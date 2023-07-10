@@ -18,7 +18,13 @@ var trueNum = 0
 var falseNum = 0
 
 //Входящие данные
-var startTime: Long = 0
+var checkTime: Boolean = false
+var startTime: Long = 5000
+var timeplus: Long = 2000
+var numLvl: Int = 1
+var numExample: Int = 1
+var words: Int = 0
+
 
 class MainWindow : Fragment() {
 
