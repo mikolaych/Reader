@@ -1,16 +1,22 @@
 package com.example.reader
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import com.example.reader.databinding.SettingsBinding
 import com.google.android.material.slider.Slider
 
 
 class Settings : Fragment() {
     lateinit var binding: SettingsBinding
+    private val openModel: OpenModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +47,7 @@ class Settings : Fragment() {
                 }
             }
 
-            //Подсчет количества слов
+            //Переключение слайдеров
 
             lvlNum.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
                 override fun onStartTrackingTouch(slider: Slider) {
@@ -63,9 +69,14 @@ class Settings : Fragment() {
 
             }
 
+        btnSaveSettings()
+
     }
 
-    private fun writeWords() {
+
+
+    //Подсчет количества слов
+        private fun writeWords() {
         var words: Float = 0F
 
         when {
@@ -76,6 +87,32 @@ class Settings : Fragment() {
         }
         binding.numWords.text = words.toInt().toString()
     }
+
+    //Кнопка "Сохранить настройки"
+    private fun btnSaveSettings() {
+        binding.apply {
+            btnSaveSet.setOnClickListener {
+                if (switchTimer.isChecked && (timer.text.isNullOrEmpty() || timerPlus.text.isNullOrEmpty())){
+                    info.text = "Заполните поля таймера!"
+                } else {
+                    openModel.numExercise.value = binding.examNum.value.toInt()
+                    openModel.numLvl.value = binding.lvlNum.value.toInt()
+                    openModel.timer.value = binding.timer.text.toString().toLong()
+                    openModel.timerPlus.value = binding.timerPlus.text.toString().toLong()
+                    openModel.words.value = binding.numWords.text.toString().toInt()
+                    openModel.checkTimer.value = binding.switchTimer.isChecked
+                    parentFragmentManager.beginTransaction().replace(R.id.fragment, MainWindow()).commit()
+                    parentFragmentManager.beginTransaction().remove(Settings())
+
+
+
+
+                }
+
+            }
+        }
+    }
+
 
 
 }

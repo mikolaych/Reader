@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import com.example.reader.databinding.MainWindowBinding
 
 var mainList = listOf<String>()
@@ -29,6 +32,7 @@ var words: Int = 0
 class MainWindow : Fragment() {
 
     lateinit var binding: MainWindowBinding
+    private val openModel: OpenModel by activityViewModels()
     private var timer: CountDownTimer? = null
 
     override fun onCreateView(
@@ -42,6 +46,26 @@ class MainWindow : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//LifeData
+        openModel.numExercise.observe(activity as LifecycleOwner) {
+            numExample = it
+        }
+        openModel.numLvl.observe(activity as LifecycleOwner) {
+            numLvl = it
+        }
+        openModel.timer.observe(activity as LifecycleOwner) {
+            startTime = it
+        }
+        openModel.timerPlus.observe(activity as LifecycleOwner) {
+            timeplus = it
+        }
+        openModel.words.observe(activity as LifecycleOwner) {
+            words = it
+        }
+        openModel.checkTimer.observe(activity as LifecycleOwner) {
+            checkTime = it
+        }
 
 
         inputText()
