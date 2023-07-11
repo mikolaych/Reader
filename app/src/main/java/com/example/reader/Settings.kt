@@ -70,9 +70,23 @@ class Settings : Fragment() {
             }
 
         btnSaveSettings()
+        btnQuickGame()
 
     }
 
+    //Быстрая игра
+    private fun btnQuickGame() {
+        binding.btnQuickGame.setOnClickListener {
+            openModel.numExercise.value = 10
+            openModel.numLvl.value = 2
+            openModel.timer.value = 5000
+            openModel.timerPlus.value = 3000
+            openModel.words.value = 30
+            openModel.checkTimer.value = true
+            parentFragmentManager.beginTransaction().replace(R.id.fragment, MainWindow()).commit()
+            parentFragmentManager.beginTransaction().remove(Settings())
+        }
+    }
 
 
     //Подсчет количества слов
@@ -87,6 +101,8 @@ class Settings : Fragment() {
         }
         binding.numWords.text = words.toInt().toString()
     }
+
+    //
 
     //Кнопка "Сохранить настройки"
     private fun btnSaveSettings() {

@@ -70,22 +70,28 @@ class MainWindow : Fragment() {
 
         inputText()
     }
-
+//Ввод текста
     private fun inputText() {
         binding.btnInput.setOnClickListener {
             if (binding.editText.text.isNullOrBlank()) {
                 binding.info.visibility = View.VISIBLE
                 binding.info.text = "Введите текст!"
             } else {
-                ready()
-                binding.btnInput.visibility = View.INVISIBLE
-                binding.editText.visibility = View.INVISIBLE
 
                 var inText = binding.editText.text.toString()
                 val delimeter = " "
                 mainList = inText.split(delimeter)
+                if (mainList.size < words){
+                    binding.info.text = "Слов должно быть не менее $words!"
+                } else {
+
+                binding.btnInput.visibility = View.INVISIBLE
+                binding.editText.visibility = View.INVISIBLE
 
                 binding.info.text = null
+
+                ready()
+                }
 
             }
         }
