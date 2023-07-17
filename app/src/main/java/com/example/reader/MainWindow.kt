@@ -188,9 +188,9 @@ class MainWindow : Fragment() {
 
             //LifeData
             openModel.trueRez.value = binding.trueWin.text.toString()
-            openModel.falseRez.value = binding.trueWin.text.toString()
-            openModel.allWords.value = binding.trueWin.text.toString()
-            openModel.wordsInMin.value = binding.trueWin.text.toString()
+            openModel.falseRez.value = binding.falseWin.text.toString()
+            openModel.allWords.value = mainList.size.toString()
+            openModel.wordsInMin.value = binding.numWords.text.toString()
             openModel.wrongWordsList.value = exampleArray
 
 

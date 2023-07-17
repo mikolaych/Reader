@@ -11,10 +11,10 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.reader.databinding.StatisticBinding
 
 //Входящие данные:
-var trueRez: String = ""
-var falseRez: String = ""
-var allWords: String = ""
-var wordsInMin: String = ""
+var trueRezText: String = ""
+var falseRezText: String = ""
+var allWordsText: String = ""
+var wordsInMinText: String = ""
 var wrongWordsList = mutableListOf<String>()
 
 class Statistic : Fragment() {
@@ -36,21 +36,40 @@ class Statistic : Fragment() {
 
         //LifeData
         openModel.trueRez.observe(activity as LifecycleOwner) {
-            trueRez = it
+            trueRezText = it
         }
         openModel.falseRez.observe(activity as LifecycleOwner) {
-            falseRez = it
+            falseRezText = it
         }
         openModel.allWords.observe(activity as LifecycleOwner) {
-            allWords = it
+            allWordsText = it
         }
         openModel.wordsInMin.observe(activity as LifecycleOwner) {
-            wordsInMin = it
+            wordsInMinText = it
         }
         openModel.wrongWordsList.observe(activity as LifecycleOwner) {
             wrongWordsList = it
         }
+
+       binding.apply {
+           trueRez.text = trueRezText.toString()
+           falseRez.text = falseRezText.toString()
+           allRez.text = allWordsText.toString()
+           wordInMin.text = wordsInMinText.toString()
+
+           if (wrongWordsList.size == 0){
+               wrongWords.text = "Нет ошибок"
+               binding.falseRez.text = "0"
+           } else wrongWords.text = wrongWordsList.toString()
+       }
+
+        binding.close.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.fragment, Settings()).commit()
+            parentFragmentManager.beginTransaction().remove(Statistic())
+        }
     }
+
+
 
 
 }
