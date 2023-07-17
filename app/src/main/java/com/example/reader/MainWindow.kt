@@ -19,13 +19,14 @@ var wordNum = 0
 var plusTime : Long = 0
 var trueNum = 0
 var falseNum = 0
+var level = 3
 
 //Входящие данные
 var checkTime: Boolean = false
 var startTime: Long = 5000
 var timeplus: Long = 2000
-var numLvl: Int = 1
-var numExample: Int = 1
+var numLvl: Int = 0
+var numExample: Int = 0
 var words: Int = 0
 
 
@@ -97,6 +98,10 @@ class MainWindow : Fragment() {
         }
     }
 
+
+
+//Готовность UI
+
     private fun ready() {
         binding.shText.visibility = View.INVISIBLE
 
@@ -121,34 +126,66 @@ class MainWindow : Fragment() {
 
 
             }
-            timeToReady()
+            timeToReady(level)
+
         }
     }
 
 
-    private fun timeToReady() {
-        timer?.cancel()
-        timer = object : CountDownTimer(3000,1000){
-            override fun onTick(p0: Long) {
-                binding.timer.text = (p0/1000).toString()
-            }
-            override fun onFinish() {
+
+    //Обратный отсчет, вывод слов на экран из списка
+    private fun timeToReady(level: Int) {
+        if (level <= numLvl){   //Контроль уровня
+            timer?.cancel()
+            timer = object : CountDownTimer(3000,1000){
+                override fun onTick(p0: Long) {
+                    binding.timer.text = (p0/1000).toString()
+                }
+                override fun onFinish() {
+
+                    binding.btnStop.visibility = View.VISIBLE
+                    binding.viewText.visibility = View.VISIBLE
+
+                    when (level) {
+                        1 -> {
+                            binding.viewText.text = mainList[wordNum]
+                            binding.num.text = wordNum.toString()
+                            binding.size.text = mainList.size.toString()
+                            wordNum++
+                        }
+
+                        2 -> {
+                            binding.viewText.text = mainList[wordNum] + " " + mainList[wordNum + 1]
+                            wordNum += 2
+                        }
+
+                        3 -> {
+                            binding.viewText.text =
+                                mainList[wordNum] + " " + mainList[wordNum + 1] + " " + mainList[wordNum + 2]
+                            wordNum += 3
+                        }
+
+                        4 -> {
+                            binding.viewText.text =
+                                mainList[wordNum] + " " + mainList[wordNum + 1] + " "  + mainList[wordNum + 2] + " " + mainList[wordNum + 3]
+                            wordNum += 4
+                        }
+                    }
 
 
 
-                binding.btnStop.visibility = View.VISIBLE
-                binding.viewText.visibility = View.VISIBLE
+                    timeToStop(startTime)
+                    stop()
 
-                binding.viewText.text = mainList[wordNum]
-                wordNum++
-                binding.num.text = wordNum.toString()
-                binding.size.text = mainList.size.toString()
+                }
+            }.start()
 
-                timeToStop(startTime)
-                stop()
+        } else {  //Переход на страницу статистики
+            parentFragmentManager.beginTransaction().replace(R.id.fragment, Statistic()).commit()
+            parentFragmentManager.beginTransaction().remove(MainWindow())
+        }
 
-            }
-        }.start()
+
     }
 
     private fun timeToStop(startTime: Long) {
@@ -161,9 +198,19 @@ class MainWindow : Fragment() {
 
             }
             override fun onFinish() {
-                binding.viewText.text = mainList[wordNum]
+               /* binding.viewText.text = mainList[wordNum]
                 binding.btnReady.visibility = View.INVISIBLE
-                binding.btnStop.visibility = View.VISIBLE
+                binding.btnStop.visibility = View.VISIBLE*/
+
+                binding.viewText.visibility = View.INVISIBLE
+                binding.btnStop.visibility = View.INVISIBLE
+
+                tempWordEtal = binding.viewText.text.toString()
+                binding.info.text = "Введите слово (-а)"
+
+                timer?.cancel()
+
+                inputWord()
 
             }
         }.start()
@@ -178,6 +225,8 @@ class MainWindow : Fragment() {
 
             tempWordEtal = binding.viewText.text.toString()
 
+            binding.info.text = "Введите слово (-а)"
+
 
             timer?.cancel()
 
@@ -187,6 +236,7 @@ class MainWindow : Fragment() {
 
     }
 
+    //Ввод слов для проверки
     private fun inputWord() {
 
 
@@ -198,7 +248,7 @@ class MainWindow : Fragment() {
 
 
             if (binding.shText.text.isNullOrEmpty()) {
-                binding.info.text = "Введите слово!"
+                binding.info.text = "ВВЕДИТЕ СЛОВО!"
             } else {
                 exampleArray.add((wordNum - 1), binding.shText.text.toString())
                 tempWord = binding.shText.text.toString()
@@ -220,7 +270,7 @@ class MainWindow : Fragment() {
                 binding.shText.text = null
                 binding.viewText.text = null
                 if (wordNum < mainList.size) {
-                    timeToReady()
+                    timeToReady(level)
                 } else end()
             }
         }
@@ -231,8 +281,8 @@ class MainWindow : Fragment() {
     private fun end() {
         binding.apply {
             editText.visibility = View.VISIBLE
-            headGrade.visibility = View.VISIBLE
-            grade.visibility = View.VISIBLE
+            headLvlNum.visibility = View.VISIBLE
+            lvlNum.visibility = View.VISIBLE
             info.visibility = View.VISIBLE
 
 
@@ -250,7 +300,7 @@ class MainWindow : Fragment() {
         }
 
         binding.info.text = exampleArray.toString()
-        binding.grade.text = falseNum.toString()
+        binding.lvlNum.text = falseNum.toString()
 
 
 

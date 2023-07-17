@@ -234,7 +234,7 @@
           app:layout_constraintTop_toBottomOf="@+id/info" />
 
       <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/headGrade"
+          android:id="@+id/headLvlNum"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="10dp"
@@ -250,7 +250,7 @@
           app:layout_constraintTop_toBottomOf="@+id/btnInput" />
 
       <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/grade"
+          android:id="@+id/lvlNum"
           android:layout_width="30dp"
           android:layout_height="30dp"
           android:layout_marginStart="5dp"
@@ -259,10 +259,10 @@
           android:textColor="@android:color/holo_red_dark"
           android:textSize="20sp"
           android:visibility="invisible"
-          app:layout_constraintBottom_toBottomOf="@+id/headGrade"
+          app:layout_constraintBottom_toBottomOf="@+id/headLvlNum"
           app:layout_constraintEnd_toStartOf="@+id/btnNext"
-          app:layout_constraintStart_toEndOf="@+id/headGrade"
-          app:layout_constraintTop_toTopOf="@+id/headGrade" />
+          app:layout_constraintStart_toEndOf="@+id/headLvlNum"
+          app:layout_constraintTop_toTopOf="@+id/headLvlNum" />
 
       <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/headNumWords"
@@ -277,7 +277,7 @@
           android:visibility="invisible"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
-          app:layout_constraintStart_toEndOf="@+id/grade"
+          app:layout_constraintStart_toEndOf="@+id/lvlNum"
           app:layout_constraintTop_toBottomOf="@+id/btnInput" />
 
       <androidx.appcompat.widget.AppCompatTextView
@@ -290,9 +290,9 @@
           android:textColor="@android:color/holo_red_dark"
           android:textSize="20sp"
           android:visibility="invisible"
-          app:layout_constraintBottom_toBottomOf="@+id/headGrade"
+          app:layout_constraintBottom_toBottomOf="@+id/headLvlNum"
           app:layout_constraintStart_toEndOf="@+id/headNumWords"
-          app:layout_constraintTop_toTopOf="@+id/headGrade" />
+          app:layout_constraintTop_toTopOf="@+id/headLvlNum" />
 
 
 

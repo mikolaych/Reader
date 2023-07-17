@@ -113,8 +113,8 @@ class Settings : Fragment() {
                 } else {
                     openModel.numExercise.value = binding.examNum.value.toInt()
                     openModel.numLvl.value = binding.lvlNum.value.toInt()
-                    openModel.timer.value = binding.timer.text.toString().toLong()
-                    openModel.timerPlus.value = binding.timerPlus.text.toString().toLong()
+                    openModel.timer.value = binding.timer.text.toString().toLong() * 1000
+                    openModel.timerPlus.value = binding.timerPlus.text.toString().toLong() * 1000
                     openModel.words.value = binding.numWords.text.toString().toInt()
                     openModel.checkTimer.value = binding.switchTimer.isChecked
                     parentFragmentManager.beginTransaction().replace(R.id.fragment, MainWindow()).commit()
