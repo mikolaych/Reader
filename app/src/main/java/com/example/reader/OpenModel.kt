@@ -12,9 +12,7 @@ open class OpenModel: ViewModel() {
     val numExercise: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
     }
-    val checkTimer: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
+
     val timer: MutableLiveData<Long> by lazy {
         MutableLiveData<Long>()
     }
@@ -25,5 +23,26 @@ open class OpenModel: ViewModel() {
         MutableLiveData<Int>()
     }
 
+
     //Для Statistic
+    val trueRez: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val falseRez: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val allWords: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val wordsInMin: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val wrongWordsList: MutableLiveData<MutableList<String>> by lazy {
+        MutableLiveData<MutableList<String>>()
+    }
+
 }

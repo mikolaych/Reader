@@ -82,7 +82,6 @@ class Settings : Fragment() {
             openModel.timer.value = 5000
             openModel.timerPlus.value = 3000
             openModel.words.value = 30
-            openModel.checkTimer.value = true
             parentFragmentManager.beginTransaction().replace(R.id.fragment, MainWindow()).commit()
             parentFragmentManager.beginTransaction().remove(Settings())
         }
@@ -116,7 +115,6 @@ class Settings : Fragment() {
                     openModel.timer.value = binding.timer.text.toString().toLong() * 1000
                     openModel.timerPlus.value = binding.timerPlus.text.toString().toLong() * 1000
                     openModel.words.value = binding.numWords.text.toString().toInt()
-                    openModel.checkTimer.value = binding.switchTimer.isChecked
                     parentFragmentManager.beginTransaction().replace(R.id.fragment, MainWindow()).commit()
                     parentFragmentManager.beginTransaction().remove(Settings())
 

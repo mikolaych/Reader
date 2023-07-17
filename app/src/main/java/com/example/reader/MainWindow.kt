@@ -20,9 +20,9 @@ var plusTime : Long = 0
 var trueNum = 0
 var falseNum = 0
 var level = 1
+var number = 1
 
 //Входящие данные
-var checkTime: Boolean = false
 var startTime: Long = 5000
 var timeplus: Long = 2000
 var numLvl: Int = 0
@@ -64,11 +64,9 @@ class MainWindow : Fragment() {
         openModel.words.observe(activity as LifecycleOwner) {
             words = it
         }
-        openModel.checkTimer.observe(activity as LifecycleOwner) {
-            checkTime = it
-        }
 
 
+        binding.lvlNum.text = "1"
         inputText()
     }
 //Ввод текста
@@ -83,7 +81,7 @@ class MainWindow : Fragment() {
                 val delimeter = " "
                 mainList = inText.split(delimeter)
                 if (mainList.size < words){
-                    binding.info.text = "Слов должно быть не менее $words!"
+                    binding.info.text = "Введено ${mainList.size}, надо не менее $words!"
                 } else {
 
                 binding.btnInput.visibility = View.INVISIBLE
@@ -123,6 +121,8 @@ class MainWindow : Fragment() {
                 num.visibility = View.VISIBLE
                 slash.visibility = View.VISIBLE
                 size.visibility = View.VISIBLE
+                headLvlNum.visibility = View.VISIBLE
+                lvlNum.visibility = View.VISIBLE
 
 
             }
@@ -135,7 +135,7 @@ class MainWindow : Fragment() {
 
     //Обратный отсчет, вывод слов на экран из списка
     private fun timeToReady(level: Int) {
-        if (level <= numLvl){   //Контроль уровня
+        if (((mainList.size - wordNum)/level) >= 1){   //Контроль уровня
             timer?.cancel()
             timer = object : CountDownTimer(3000,1000){
                 override fun onTick(p0: Long) {
@@ -157,18 +157,23 @@ class MainWindow : Fragment() {
                         2 -> {
                             binding.viewText.text = mainList[wordNum] + " " + mainList[wordNum + 1]
                             wordNum += 2
+                            binding.num.text = wordNum.toString()
+
                         }
 
                         3 -> {
-                            binding.viewText.text =
-                                mainList[wordNum] + " " + mainList[wordNum + 1] + " " + mainList[wordNum + 2]
+                            binding.viewText.text = mainList[wordNum] + " " + mainList[wordNum + 1] + " " + mainList[wordNum + 2]
                             wordNum += 3
+                            binding.num.text = wordNum.toString()
+
                         }
 
                         4 -> {
                             binding.viewText.text =
                                 mainList[wordNum] + " " + mainList[wordNum + 1] + " "  + mainList[wordNum + 2] + " " + mainList[wordNum + 3]
                             wordNum += 4
+                            binding.num.text = wordNum.toString()
+
                         }
                     }
 
@@ -180,6 +185,15 @@ class MainWindow : Fragment() {
             }.start()
 
         } else {  //Переход на страницу статистики
+
+            //LifeData
+            openModel.trueRez.value = binding.trueWin.text.toString()
+            openModel.falseRez.value = binding.trueWin.text.toString()
+            openModel.allWords.value = binding.trueWin.text.toString()
+            openModel.wordsInMin.value = binding.trueWin.text.toString()
+            openModel.wrongWordsList.value = exampleArray
+
+
             parentFragmentManager.beginTransaction().replace(R.id.fragment, Statistic()).commit()
             parentFragmentManager.beginTransaction().remove(MainWindow())
         }
@@ -190,12 +204,16 @@ class MainWindow : Fragment() {
 
     //Контроль уровня
     private fun levelControl() {
-        var number = 1
-       if (wordNum < (numExample * level)) {
+       if (number < numExample) {
            number++
-       } else if (wordNum > (numExample * level) ) {
+       } else if (number >= numExample) {
            number = 1
-           level++
+           if (level < numLvl) {
+               level++
+               startTime += timeplus
+               binding.lvlNum.text = level.toString()
+           }
+
        }
     }
 
@@ -274,9 +292,9 @@ class MainWindow : Fragment() {
                 binding.timer.text = null
                 binding.shText.text = null
                 binding.viewText.text = null
-                if (wordNum < mainList.size) {
-                    timeToReady(level)
-                } else end()
+
+                timeToReady(level)
+
             }
         }
 
