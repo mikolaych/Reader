@@ -19,7 +19,7 @@ var wordNum = 0
 var plusTime : Long = 0
 var trueNum = 0
 var falseNum = 0
-var level = 3
+var level = 1
 
 //Входящие данные
 var checkTime: Boolean = false
@@ -172,8 +172,7 @@ class MainWindow : Fragment() {
                         }
                     }
 
-
-
+                    levelControl()
                     timeToStop(startTime)
                     stop()
 
@@ -186,6 +185,18 @@ class MainWindow : Fragment() {
         }
 
 
+    }
+
+
+    //Контроль уровня
+    private fun levelControl() {
+        var number = 1
+       if (wordNum < (numExample * level)) {
+           number++
+       } else if (wordNum > (numExample * level) ) {
+           number = 1
+           level++
+       }
     }
 
     private fun timeToStop(startTime: Long) {
@@ -222,14 +233,10 @@ class MainWindow : Fragment() {
         binding.btnStop.setOnClickListener {
             binding.viewText.visibility = View.INVISIBLE
             binding.btnStop.visibility = View.INVISIBLE
-
             tempWordEtal = binding.viewText.text.toString()
-
             binding.info.text = "Введите слово (-а)"
 
-
             timer?.cancel()
-
 
             inputWord()
         }
@@ -238,8 +245,6 @@ class MainWindow : Fragment() {
 
     //Ввод слов для проверки
     private fun inputWord() {
-
-
 
         binding.btnNext.visibility = View.VISIBLE
         binding.shText.visibility = View.VISIBLE
@@ -250,7 +255,7 @@ class MainWindow : Fragment() {
             if (binding.shText.text.isNullOrEmpty()) {
                 binding.info.text = "ВВЕДИТЕ СЛОВО!"
             } else {
-                exampleArray.add((wordNum - 1), binding.shText.text.toString())
+
                 tempWord = binding.shText.text.toString()
                 if (binding.shText.text.toString() == tempWordEtal) {
                     trueNum++
@@ -260,9 +265,9 @@ class MainWindow : Fragment() {
                 } else {
                     falseNum++
                     binding.falseWin.text = falseNum.toString()
+                    exampleArray.add(binding.shText.text.toString())
+
                 }
-
-
 
                 binding.btnNext.visibility = View.INVISIBLE
                 binding.info.text = null
