@@ -30,6 +30,8 @@ class Settings : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        parentFragmentManager.beginTransaction().remove(Statistic())
+
         binding.apply {
 
             //Переключатель таймера
@@ -116,7 +118,7 @@ class Settings : Fragment() {
                     openModel.timerPlus.value = binding.timerPlus.text.toString().toLong() * 1000
                     openModel.words.value = binding.numWords.text.toString().toInt()
                     parentFragmentManager.beginTransaction().replace(R.id.fragment, MainWindow()).commit()
-                    parentFragmentManager.beginTransaction().remove(Settings())
+
 
 
 

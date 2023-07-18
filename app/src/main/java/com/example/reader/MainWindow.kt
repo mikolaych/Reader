@@ -48,6 +48,7 @@ class MainWindow : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
 //LifeData
         openModel.numExercise.observe(activity as LifecycleOwner) {
             numExample = it
@@ -71,6 +72,12 @@ class MainWindow : Fragment() {
     }
 //Ввод текста
     private fun inputText() {
+
+    binding.clear.setOnClickListener {
+        binding.editText.text = null
+
+    }
+
         binding.btnInput.setOnClickListener {
             if (binding.editText.text.isNullOrBlank()) {
                 binding.info.visibility = View.VISIBLE
@@ -86,6 +93,7 @@ class MainWindow : Fragment() {
 
                 binding.btnInput.visibility = View.INVISIBLE
                 binding.editText.visibility = View.INVISIBLE
+                    binding.clear.visibility = View.INVISIBLE
 
                 binding.info.text = null
 
@@ -193,10 +201,11 @@ class MainWindow : Fragment() {
             openModel.allWords.value = mainList.size.toString()
             openModel.wordsInMin.value = binding.numWords.text.toString().toInt()
             openModel.wrongWordsList.value = exampleArray
+            openModel.levels.value = level.toString()
 
 
             parentFragmentManager.beginTransaction().replace(R.id.fragment, Statistic()).commit()
-            parentFragmentManager.beginTransaction().remove(MainWindow())
+
         }
 
 

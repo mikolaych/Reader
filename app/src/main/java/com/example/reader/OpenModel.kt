@@ -40,4 +40,8 @@ open class OpenModel: ViewModel() {
     val wrongWordsList: MutableLiveData<MutableList<String>> by lazy {
         MutableLiveData<MutableList<String>>()
     }
+    val levels: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
 }

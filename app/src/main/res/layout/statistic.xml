@@ -120,6 +120,18 @@
             app:layout_constraintTop_toBottomOf="@+id/tittle3" />
 
         <TextView
+            android:id="@+id/headLvls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="Уровней:"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tittle4" />
+
+        <TextView
             android:id="@+id/wordInMin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,16 +147,42 @@
             app:layout_constraintStart_toEndOf="@+id/tittle4" />
 
         <TextView
+            android:id="@+id/lvls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#AC8585"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginStart="30dp"
+            android:text="200"
+            android:textColor="@color/timer"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/headLvls"
+            app:layout_constraintStart_toEndOf="@+id/headLvls" />
+
+        <TextView
             android:id="@+id/gradeTittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Оценка:"
+            android:layout_marginStart="30dp"
+            android:text="Правильность"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/wordInMin" />
+            app:layout_constraintTop_toBottomOf="@+id/headLvls" />
+
+        <TextView
+            android:id="@+id/gradeTittle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:text="Скорость"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headLvls" />
 
         <TextView
             android:id="@+id/grade"
@@ -157,9 +195,24 @@
             android:textColor="@android:color/holo_red_dark"
             android:textSize="50sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/gradeTittle"
+            app:layout_constraintStart_toStartOf="@+id/gradeTittle"
             app:layout_constraintTop_toBottomOf="@+id/gradeTittle" />
+
+        <TextView
+            android:id="@+id/grade2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="#609F50"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/gradeTittle2"
+            app:layout_constraintStart_toStartOf="@+id/gradeTittle2"
+            app:layout_constraintTop_toBottomOf="@+id/gradeTittle2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/close"
@@ -182,7 +235,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="20dp"
+            android:textSize="15dp"
             app:layout_constraintTop_toBottomOf="@+id/close"
             tools:layout_editor_absoluteX="10dp" />
 

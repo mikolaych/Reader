@@ -295,6 +295,20 @@
           app:layout_constraintStart_toEndOf="@+id/headNumWords"
           app:layout_constraintTop_toTopOf="@+id/headLvlNum" />
 
+      <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/clear"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/btnEnter"
+          android:gravity="center"
+          android:layout_marginTop="10dp"
+          android:padding="5dp"
+          android:text="@string/btn_clear"
+          android:textSize="20sp"
+          app:layout_constraintEnd_toEndOf="@+id/editText"
+          app:layout_constraintStart_toStartOf="@+id/editText"
+          app:layout_constraintTop_toBottomOf="@+id/headNumWords" />
+
 
 
 

@@ -15,8 +15,10 @@ import kotlin.math.round
 var trueRezText: String = ""
 var falseRezText: String = ""
 var allWordsText: String = ""
+var levels: String = ""
 var wordsInMinText: Int = 0
 var wrongWordsList = mutableListOf<String>()
+
 
 class Statistic : Fragment() {
     lateinit var binding: StatisticBinding
@@ -35,6 +37,8 @@ class Statistic : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        parentFragmentManager.beginTransaction().remove(MainWindow())
+
         //LifeData
         openModel.trueRez.observe(activity as LifecycleOwner) {
             trueRezText = it
@@ -51,6 +55,9 @@ class Statistic : Fragment() {
         openModel.wrongWordsList.observe(activity as LifecycleOwner) {
             wrongWordsList = it
         }
+        openModel.levels.observe(activity as LifecycleOwner) {
+            levels = it
+        }
 
 
 
@@ -59,10 +66,10 @@ class Statistic : Fragment() {
            falseRez.text = falseRezText.toString()
            allRez.text = allWordsText.toString()
            wordInMin.text = wordsInMinText.toString()
+           lvls.text = levels
 
            var preGradle = 0
            var preGradle2 = 0
-           var gradle = 0
 
            if (wordsInMinText < 25) preGradle = 2
            else if (wordsInMinText in 26..39) preGradle = 3
@@ -75,14 +82,11 @@ class Statistic : Fragment() {
            if (binding.trueRez.text.toString().toDouble() >= (binding.allRez.text.toString().toDouble() * 0.6)
                && binding.trueRez.text.toString().toDouble() <= ( binding.allRez.text.toString().toDouble() * 0.79)) preGradle2 = 3
            if (binding.trueRez.text.toString().toDouble() < binding.allRez.text.toString().toDouble() * 0.59) {
-               preGradle = 2
-               preGradle2 = 2
+              preGradle2 = 2
            }
 
-           gradle = (preGradle + preGradle2) / 2
-
-           binding.grade.text = gradle.toString()
-
+          binding.grade.text = preGradle2.toString()
+          binding.grade2.text = preGradle.toString()
 
            if (wrongWordsList.size == 0){
                wrongWords.text = "Нет ошибок"
@@ -92,7 +96,7 @@ class Statistic : Fragment() {
 
         binding.close.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.fragment, Settings()).commit()
-            parentFragmentManager.beginTransaction().remove(Statistic())
+
         }
     }
 
