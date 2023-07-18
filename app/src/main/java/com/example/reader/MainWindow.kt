@@ -190,7 +190,7 @@ class MainWindow : Fragment() {
             openModel.trueRez.value = binding.trueWin.text.toString()
             openModel.falseRez.value = binding.falseWin.text.toString()
             openModel.allWords.value = mainList.size.toString()
-            openModel.wordsInMin.value = binding.numWords.text.toString()
+            openModel.wordsInMin.value = binding.numWords.text.toString().toInt()
             openModel.wrongWordsList.value = exampleArray
 
 

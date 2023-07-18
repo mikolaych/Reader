@@ -14,7 +14,7 @@ import com.example.reader.databinding.StatisticBinding
 var trueRezText: String = ""
 var falseRezText: String = ""
 var allWordsText: String = ""
-var wordsInMinText: String = ""
+var wordsInMinText: Int = 0
 var wrongWordsList = mutableListOf<String>()
 
 class Statistic : Fragment() {
@@ -51,11 +51,21 @@ class Statistic : Fragment() {
             wrongWordsList = it
         }
 
+
+
        binding.apply {
            trueRez.text = trueRezText.toString()
            falseRez.text = falseRezText.toString()
            allRez.text = allWordsText.toString()
            wordInMin.text = wordsInMinText.toString()
+
+           var preGradle = 0
+
+           if (wordsInMinText < 25) grade.text = "2"
+           else if (wordsInMinText in 26..39) grade.text = "3"
+           else if (wordsInMinText in 40..55) grade.text = "4"
+           else if (wordsInMinText > 55) grade.text = "5"
+
 
            if (wrongWordsList.size == 0){
                wrongWords.text = "Нет ошибок"

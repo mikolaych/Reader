@@ -34,8 +34,8 @@ open class OpenModel: ViewModel() {
     val allWords: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
-    val wordsInMin: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    val wordsInMin: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
     }
     val wrongWordsList: MutableLiveData<MutableList<String>> by lazy {
         MutableLiveData<MutableList<String>>()
