@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.example.reader.databinding.StatisticBinding
+import kotlin.math.round
 
 //Входящие данные:
 var trueRezText: String = ""
@@ -60,11 +61,27 @@ class Statistic : Fragment() {
            wordInMin.text = wordsInMinText.toString()
 
            var preGradle = 0
+           var preGradle2 = 0
+           var gradle = 0
 
-           if (wordsInMinText < 25) grade.text = "2"
-           else if (wordsInMinText in 26..39) grade.text = "3"
-           else if (wordsInMinText in 40..55) grade.text = "4"
-           else if (wordsInMinText > 55) grade.text = "5"
+           if (wordsInMinText < 25) preGradle = 2
+           else if (wordsInMinText in 26..39) preGradle = 3
+           else if (wordsInMinText in 40..55) preGradle = 4
+           else if (wordsInMinText > 55) preGradle = 5
+
+           if (binding.trueRez.text.toString().toDouble() > binding.allRez.text.toString().toDouble() * 0.9) preGradle2 = 5
+           if (binding.trueRez.text.toString().toDouble() >= (binding.allRez.text.toString().toDouble() * 0.8)
+               && binding.trueRez.text.toString().toDouble() <= ( binding.allRez.text.toString().toDouble() * 0.9)) preGradle2 = 4
+           if (binding.trueRez.text.toString().toDouble() >= (binding.allRez.text.toString().toDouble() * 0.6)
+               && binding.trueRez.text.toString().toDouble() <= ( binding.allRez.text.toString().toDouble() * 0.79)) preGradle2 = 3
+           if (binding.trueRez.text.toString().toDouble() < binding.allRez.text.toString().toDouble() * 0.59) {
+               preGradle = 2
+               preGradle2 = 2
+           }
+
+           gradle = (preGradle + preGradle2) / 2
+
+           binding.grade.text = gradle.toString()
 
 
            if (wrongWordsList.size == 0){

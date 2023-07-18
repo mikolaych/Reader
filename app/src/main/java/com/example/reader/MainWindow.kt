@@ -101,6 +101,7 @@ class MainWindow : Fragment() {
 //Готовность UI
 
     private fun ready() {
+        binding.editText.text = null
         binding.shText.visibility = View.INVISIBLE
 
         binding.btnReady.visibility = View.VISIBLE
@@ -276,12 +277,24 @@ class MainWindow : Fragment() {
 
                 tempWord = binding.shText.text.toString()
                 if (binding.shText.text.toString() == tempWordEtal) {
-                    trueNum++
+                    when(level) {
+                        1 -> trueNum++
+                        2 -> trueNum+=2
+                        3 -> trueNum+=3
+                        4 -> trueNum+=4
+
+                    }
                     plusTime += binding.timer.text.toString().toLong()
                     binding.numWords.text = (trueNum * 60000 / plusTime).toString()
                     binding.trueWin.text = trueNum.toString()
                 } else {
-                    falseNum++
+                    when(level){
+                        1 -> falseNum++
+                        2 -> falseNum+=2
+                        3 -> falseNum+=3
+                        4 -> falseNum+=4
+                    }
+
                     binding.falseWin.text = falseNum.toString()
                     exampleArray.add(binding.shText.text.toString())
 
@@ -297,37 +310,9 @@ class MainWindow : Fragment() {
 
             }
         }
-
-
     }
 
-    private fun end() {
-        binding.apply {
-            editText.visibility = View.VISIBLE
-            headLvlNum.visibility = View.VISIBLE
-            lvlNum.visibility = View.VISIBLE
-            info.visibility = View.VISIBLE
 
-
-
-            shText.visibility = View.INVISIBLE
-            timer.visibility = View.INVISIBLE
-            headFalse.visibility = View.INVISIBLE
-            headTrue.visibility = View.INVISIBLE
-            trueWin.visibility = View.INVISIBLE
-            falseWin.visibility = View.INVISIBLE
-            num.visibility = View.INVISIBLE
-            slash.visibility = View.INVISIBLE
-            size.visibility = View.INVISIBLE
-
-        }
-
-        binding.info.text = exampleArray.toString()
-        binding.lvlNum.text = falseNum.toString()
-
-
-
-    }
 
 
 }
