@@ -10,17 +10,23 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.example.reader.databinding.MainWindowBinding
+import java.util.logging.Handler
 
 var mainList = listOf<String>()
-var exampleArray = mutableListOf<String>()
+var wrongList = mutableListOf<String>()
+var cash: String = ""
+var origList = mutableListOf<String>()
 lateinit var tempWord :String
 lateinit var tempWordEtal :String
 var wordNum = 0
 var plusTime : Long = 0
 var trueNum = 0
 var falseNum = 0
-var level = 1
+var lev = 1
 var number = 1
+
+var progressStatus = 0
+var handler = android.os.Handler()
 
 //Входящие данные
 var startTime: Long = 5000
@@ -48,6 +54,23 @@ class MainWindow : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        convertText()
+
+
+        wrongList.clear()
+        origList.clear()
+        binding.apply {
+            trueWin.text = null
+            falseWin.text = null
+            lvlNum.text = null
+            numWords.text = null
+            num.text = null
+            size.text = null
+            shText.text = null
+            timer.text = null
+            viewText.text = null
+        }
+
 
 //LifeData
         openModel.numExercise.observe(activity as LifecycleOwner) {
@@ -70,7 +93,30 @@ class MainWindow : Fragment() {
         binding.lvlNum.text = "1"
         inputText()
     }
-//Ввод текста
+
+
+    //Конвертация текста
+    private fun convertText(){
+        binding.convert.setOnClickListener {
+            if (binding.editText.text.isNullOrBlank()) {
+                binding.info.visibility = View.VISIBLE
+                binding.info.text = "Введите текст!"}
+            else{
+                var convText: String = binding.editText.text.toString()
+                var txt: String = convText.replace("[!\"#$%&'()*+,./:;<=>?@\\[\\]^_`{|}~]".toRegex(), "")
+                var txt2: String = txt.replace("[\n-]".toRegex(), " ")
+                binding.editText.setText(txt2.lowercase())
+                binding.convert.visibility = View.INVISIBLE
+                binding.btnInput.visibility = View.VISIBLE
+            }
+        }
+
+
+    }
+
+
+
+    //Ввод текста
     private fun inputText() {
 
     binding.clear.setOnClickListener {
@@ -135,7 +181,7 @@ class MainWindow : Fragment() {
 
 
             }
-            timeToReady(level)
+            timeToReady(lev)
 
         }
     }
@@ -185,6 +231,7 @@ class MainWindow : Fragment() {
 
                         }
                     }
+                    cash = binding.viewText.text.toString()
 
                     levelControl()
                     timeToStop(startTime)
@@ -200,8 +247,21 @@ class MainWindow : Fragment() {
             openModel.falseRez.value = binding.falseWin.text.toString()
             openModel.allWords.value = mainList.size.toString()
             openModel.wordsInMin.value = binding.numWords.text.toString().toInt()
-            openModel.wrongWordsList.value = exampleArray
+            openModel.wrongWordsList.value = wrongList
+            openModel.origWordsList.value = origList
             openModel.levels.value = level.toString()
+
+
+            //Очистка
+            wordNum = 0
+            plusTime  = 0
+            trueNum = 0
+            falseNum = 0
+            lev = 1
+            number = 1
+
+
+
 
 
             parentFragmentManager.beginTransaction().replace(R.id.fragment, Statistic()).commit()
@@ -218,10 +278,10 @@ class MainWindow : Fragment() {
            number++
        } else if (number >= numExample) {
            number = 1
-           if (level < numLvl) {
-               level++
+           if (lev < numLvl) {
+               lev++
                startTime += timeplus
-               binding.lvlNum.text = level.toString()
+               binding.lvlNum.text = lev.toString()
            }
 
        }
@@ -286,7 +346,7 @@ class MainWindow : Fragment() {
 
                 tempWord = binding.shText.text.toString()
                 if (binding.shText.text.toString() == tempWordEtal) {
-                    when(level) {
+                    when(lev) {
                         1 -> trueNum++
                         2 -> trueNum+=2
                         3 -> trueNum+=3
@@ -297,7 +357,7 @@ class MainWindow : Fragment() {
                     binding.numWords.text = (trueNum * 60000 / plusTime).toString()
                     binding.trueWin.text = trueNum.toString()
                 } else {
-                    when(level){
+                    when(lev){
                         1 -> falseNum++
                         2 -> falseNum+=2
                         3 -> falseNum+=3
@@ -305,7 +365,10 @@ class MainWindow : Fragment() {
                     }
 
                     binding.falseWin.text = falseNum.toString()
-                    exampleArray.add(binding.shText.text.toString())
+                    wrongList.add(binding.shText.text.toString())
+                    origList.add(cash)
+
+
 
                 }
 
@@ -315,11 +378,13 @@ class MainWindow : Fragment() {
                 binding.shText.text = null
                 binding.viewText.text = null
 
-                timeToReady(level)
+                timeToReady(lev)
 
             }
         }
     }
+
+
 
 
 

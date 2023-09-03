@@ -18,6 +18,7 @@ var allWordsText: String = ""
 var levels: String = ""
 var wordsInMinText: Int = 0
 var wrongWordsList = mutableListOf<String>()
+var originalWordsList = mutableListOf<String>()
 
 
 class Statistic : Fragment() {
@@ -55,6 +56,9 @@ class Statistic : Fragment() {
         openModel.wrongWordsList.observe(activity as LifecycleOwner) {
             wrongWordsList = it
         }
+        openModel.origWordsList.observe(activity as LifecycleOwner) {
+            originalWordsList = it
+        }
         openModel.levels.observe(activity as LifecycleOwner) {
             levels = it
         }
@@ -67,6 +71,7 @@ class Statistic : Fragment() {
            allRez.text = allWordsText.toString()
            wordInMin.text = wordsInMinText.toString()
            lvls.text = levels
+
 
            var preGradle = 0
            var preGradle2 = 0
@@ -91,10 +96,34 @@ class Statistic : Fragment() {
            if (wrongWordsList.size == 0){
                wrongWords.text = "Нет ошибок"
                binding.falseRez.text = "0"
-           } else wrongWords.text = wrongWordsList.toString()
+               binding.origWords.text = null
+           } else {
+               wrongWords.text = wrongWordsList.toString()
+               origWords.text = originalWordsList.toString()
+           }
        }
 
         binding.close.setOnClickListener {
+
+            //Очистка
+            trueRezText = ""
+            falseRezText =  ""
+            allWordsText = ""
+            levels = ""
+            wordsInMinText = 0
+            binding.wrongWords.text = null
+            binding.origWords.text = null
+
+
+            //LifeData
+
+            //LifeData
+            openModel.trueRez.value = ""
+            openModel.falseRez.value = ""
+            openModel.allWords.value = ""
+            openModel.wordsInMin.value = 0
+
+
             parentFragmentManager.beginTransaction().replace(R.id.fragment, Settings()).commit()
 
         }
